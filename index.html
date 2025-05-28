@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plaud Audio Downloader</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Plaud Audio Downloader</h1>
+      <p class="subtitle">Download your audio recordings from app.plaud.ai</p>
+    </header>
+
+    <main>
+      <div class="tabs">
+        <button class="tab-button active" data-tab="download">Download</button>
+        <button class="tab-button" data-tab="settings">Settings</button>
+        <button class="tab-button" data-tab="help">Help</button>
+      </div>
+
+      <div class="tab-content">
+        <!-- Download Tab -->
+        <div class="tab-pane active" id="download">
+          <div class="card">
+            <h2>Download Audio Recordings</h2>
+            <p>Click the button below to start downloading your audio recordings from app.plaud.ai.</p>
+            <p>A browser window will open where you'll need to log in to your Plaud account.</p>
+            <p>Once logged in, navigate to the page with your recordings.</p>
+
+            <div class="button-group">
+              <button id="start-download" class="primary-button">Start Download</button>
+              <button id="cancel-download" class="secondary-button" disabled>Cancel</button>
+              <button id="open-folder" class="secondary-button">Open Download Folder</button>
+            </div>
+          </div>
+
+          <div class="card status-card" id="status-card" style="display: none;">
+            <h3>Download Status</h3>
+            <p id="status-message">Waiting to start...</p>
+
+            <div class="progress-container" style="display: none;">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+              </div>
+              <div class="progress-text">0 / 0</div>
+            </div>
+
+            <div class="status-details">
+              <p id="success-count" style="display: none;">Successfully downloaded: <span>0</span></p>
+              <p id="error-count" style="display: none;">Errors: <span>0</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="tab-pane" id="settings">
+          <div class="card">
+            <h2>Settings</h2>
+
+            <div class="form-group">
+              <label for="download-dir">Download Directory:</label>
+              <div class="input-with-button">
+                <input type="text" id="download-dir" readonly>
+                <button id="select-dir" class="secondary-button">Browse</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="delay">Delay between actions (ms):</label>
+              <input type="number" id="delay" min="500" max="5000" step="100">
+              <p class="help-text">Increase this value if you experience issues with downloads.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="max-recordings">Maximum recordings to download:</label>
+              <input type="number" id="max-recordings" min="-1" step="1">
+              <p class="help-text">Set to -1 to download all recordings.</p>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="headless">
+              <label for="headless">Run in headless mode (no visible browser)</label>
+              <p class="help-text">Not recommended for first-time use.</p>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="use-existing-profile" checked>
+              <label for="use-existing-profile">Use existing browser profile</label>
+              <p class="help-text">Recommended for Apple Passkey login. Creates a temporary profile that can access cookies from your Chrome or Brave browser.</p>
+            </div>
+
+            <div class="button-group">
+              <button id="save-settings" class="primary-button">Save Settings</button>
+              <button id="reset-settings" class="secondary-button">Reset to Defaults</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Help Tab -->
+        <div class="tab-pane" id="help">
+          <div class="card">
+            <h2>How to Use</h2>
+
+            <ol class="help-steps">
+              <li>
+                <h3>Start the Download Process</h3>
+                <p>Click the "Start Download" button on the Download tab.</p>
+              </li>
+              <li>
+                <h3>Log In to Plaud</h3>
+                <p>A browser window will open. Log in to your Plaud account if needed.</p>
+              </li>
+              <li>
+                <h3>Navigate to Your Recordings</h3>
+                <p>Go to the page where your recordings are listed.</p>
+              </li>
+              <li>
+                <h3>Wait for the Process to Complete</h3>
+                <p>The app will automatically detect and download your recordings.</p>
+              </li>
+              <li>
+                <h3>Access Your Downloads</h3>
+                <p>Click "Open Download Folder" to see your downloaded audio files.</p>
+              </li>
+            </ol>
+
+            <h3>Troubleshooting</h3>
+            <ul class="troubleshooting">
+              <li>If you have trouble logging in with Apple Passkey, make sure "Use existing browser profile" is enabled in Settings.</li>
+              <li>For best results with passkeys, log in to app.plaud.ai in Chrome or Brave first, then restart the app.</li>
+              <li>If you see an error about "userDataDir", restart the app - this has been fixed in the latest version.</li>
+              <li>If downloads are failing, try increasing the delay in Settings.</li>
+              <li>Make sure you're on the correct page with your recordings.</li>
+              <li>If the app can't find your recordings, click the "I'm Ready" button when you're on the recordings page.</li>
+              <li>For technical support, contact your administrator.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Plaud Audio Downloader v1.0.0</p>
+    </footer>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
